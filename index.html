@@ -173,6 +173,8 @@ form{display:grid;gap:14px}
 input,textarea{width:100%;background:var(--bg2);border:1px solid var(--line);color:var(--text);border-radius:14px;padding:14px 16px;font:inherit;font-size:.95rem;transition:.25s}
 input:focus,textarea:focus{outline:none;border-color:var(--accent)}
 textarea{min-height:120px;resize:vertical}
+.send-row{display:flex;flex-wrap:wrap;gap:10px}
+.send-row .btn{flex:1;justify-content:center;min-width:160px}
 .cv-band{margin-top:20px;padding:30px 34px;border-radius:var(--radius);border:1px solid rgba(242,179,107,.3);background:linear-gradient(120deg,rgba(242,179,107,.08),rgba(192,132,252,.08));display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap}
 .cv-band h3{font-family:var(--serif);font-size:1.4rem}
 .cv-band p{color:var(--muted);font-size:.9rem}
@@ -379,7 +381,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
           <input name="name" placeholder="Your name" required>
           <input name="email" type="email" placeholder="Your email" required>
           <textarea name="msg" placeholder="Tell me about your project…" required></textarea>
-          <button class="btn primary" type="submit">Send message →</button>
+          <div class="send-row"><button class="btn primary" type="submit" data-via="wa">💬 Send on WhatsApp</button><button class="btn ghost" type="submit" data-via="mail">✉ Send by Email</button></div>
         </form>
       </div>
     </div>
@@ -494,13 +496,23 @@ $$('.srv').forEach(c=>c.addEventListener('pointermove',e=>{
 // toast
 function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3400)}
 
-// contact form → opens mail app (no backend needed)
+// contact form: visitor picks WhatsApp or Email (no backend needed)
 $('#form').addEventListener('submit',e=>{
   e.preventDefault();
   const f=new FormData(e.target);
-  const body=`${f.get('msg')}\n\n— ${f.get('name')} (${f.get('email')})`;
-  location.href=`mailto:${cv.email}?subject=${encodeURIComponent('Portfolio enquiry from '+f.get('name'))}&body=${encodeURIComponent(body)}`;
-  toast('Opening your email app…');e.target.reset();
+  const via=(e.submitter&&e.submitter.dataset.via)||'mail';
+  const name=f.get('name'),mail=f.get('email'),msg=f.get('msg');
+  if(via==='wa'){
+    const text=`Hello Dribbo, I'm ${name} (${mail}).\n\n${msg}`;
+    const url='https://wa.me/8801850066498?text='+encodeURIComponent(text);
+    if(!window.open(url,'_blank','noopener'))location.href=url;
+    toast('Opening WhatsApp… press Send there');
+  }else{
+    const body=`${msg}\n\n— ${name} (${mail})`;
+    location.href=`mailto:${cv.email}?subject=${encodeURIComponent('Portfolio enquiry from '+name)}&body=${encodeURIComponent(body)}`;
+    toast('Opening your email app…');
+  }
+  e.target.reset();
 });
 
 // editable CV download (Word-compatible). To use your own file instead, replace this
