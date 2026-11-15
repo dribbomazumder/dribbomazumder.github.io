@@ -283,6 +283,12 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
   .tu-fee>div+div{border-left:0;border-top:1px solid rgba(255,255,255,.18)}
 }
 
+/* cv photo */
+.cv-photo{position:relative;margin:30px auto 0;max-width:640px;border-radius:22px;overflow:hidden;border:1px solid rgba(242,179,107,.35);background:#fff;cursor:zoom-in;transition:.4s;box-shadow:0 30px 70px -40px rgba(242,179,107,.5)}
+.cv-photo:hover{transform:translateY(-6px);border-color:rgba(242,179,107,.7)}
+.cv-photo img{display:block;width:100%;height:auto}
+.cv-photo figcaption{text-align:center;font-size:.82rem;padding:12px 16px;background:var(--card);color:var(--muted);border-top:1px solid var(--line)}
+
 /* visitor band */
 .visit-band{margin-top:clamp(40px,7vw,64px);position:relative;display:flex;align-items:center;gap:clamp(16px,4vw,32px);padding:clamp(22px,4vw,34px) clamp(22px,5vw,42px);border-radius:26px;background:linear-gradient(135deg,rgba(242,179,107,.14),rgba(192,132,252,.14)),var(--card);border:1px solid rgba(242,179,107,.55);box-shadow:0 0 0 6px rgba(242,179,107,.07),0 24px 60px -24px rgba(192,132,252,.55);overflow:hidden}
 .visit-band[hidden]{display:none}
@@ -446,6 +452,10 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
         <button class="btn ghost" data-cv-view>👁 View CV</button>
       </div>
     </div>
+    <figure class="cv-photo rv" id="cvPhoto" role="button" tabindex="0" aria-label="View my CV picture larger">
+      <img id="cvPhotoImg" alt="Dribbo Mazumder — Home Tutor CV (Class 9-10)">
+      <figcaption>🔍 Tap to enlarge · My CV as a picture</figcaption>
+    </figure>
   </div>
 </section>
 
@@ -847,6 +857,13 @@ function makeCV(){
 }
 $$('[data-cv]').forEach(b=>b.addEventListener('click',makeCV));
 $$('[data-cv-view]').forEach(b=>b.addEventListener('click',()=>{$('#lbImg').src=CV_PREVIEW;$('#lb').classList.add('open')}));
+// CV picture shown directly on the page (tap to enlarge)
+$('#cvPhotoImg').src=CV_PREVIEW;
+(function(){
+  const f=$('#cvPhoto'),open=()=>{$('#lbImg').src=CV_PREVIEW;$('#lb').classList.add('open')};
+  f.addEventListener('click',open);
+  f.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}});
+})();
 </script>
 </body>
 </html>
