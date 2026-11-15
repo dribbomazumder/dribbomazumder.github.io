@@ -43,7 +43,8 @@ nav.scrolled{background:rgba(11,11,16,.78);backdrop-filter:blur(16px);-webkit-ba
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:68px}
 .logo{font-family:var(--serif);font-weight:700;font-size:1.25rem}
 .logo span{color:var(--accent)}
-.links{display:flex;gap:30px;list-style:none}
+.links{display:flex;gap:26px;list-style:none}
+@media(max-width:1000px) and (min-width:821px){.links{gap:15px}.links a{font-size:.82rem}}
 .links a{font-size:.88rem;color:var(--muted);transition:.25s;position:relative}
 .links a:hover,.links a.active{color:var(--text)}
 .links a.active::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--accent)}
@@ -187,6 +188,39 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 
 .portrait img{object-position:50% 38%}
 
+/* books */
+@keyframes rise{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.book-toggle{margin-top:40px;width:100%;display:flex;align-items:center;gap:clamp(14px,3vw,24px);padding:clamp(18px,3vw,26px) clamp(18px,4vw,32px);border-radius:var(--radius);background:linear-gradient(135deg,rgba(242,179,107,.12),rgba(192,132,252,.12)),var(--card);border:1px solid rgba(242,179,107,.45);color:var(--text);font:inherit;text-align:left;cursor:pointer;transition:.4s}
+.book-toggle:hover{transform:translateY(-4px);box-shadow:0 22px 50px -26px rgba(242,179,107,.6)}
+.bt-ic{flex:none;width:clamp(54px,12vw,68px);height:clamp(54px,12vw,68px);border-radius:20px;display:grid;place-items:center;font-size:clamp(1.6rem,5vw,2rem);background:var(--grad)}
+.bt-txt{flex:1;min-width:0;display:flex;flex-direction:column}
+.bt-txt b{font-family:var(--serif);font-size:clamp(1.4rem,4.5vw,1.9rem);font-weight:600;line-height:1.2}
+.bt-txt small{color:var(--muted);font-size:.9rem}
+.bt-arrow{flex:none;font-size:1.6rem;color:var(--accent);transition:transform .4s}
+.book-toggle[aria-expanded="true"] .bt-arrow{transform:rotate(180deg)}
+.book-panel{margin-top:18px;animation:rise .6s cubic-bezier(.2,.8,.2,1)}
+.book-panel[hidden],.book-list[hidden]{display:none}
+.book-opts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.book-opt{display:flex;flex-direction:column;gap:6px;padding:24px;border-radius:var(--radius);background:var(--card);border:1px solid var(--line);color:var(--text);font:inherit;text-align:left;cursor:pointer;transition:.35s}
+.book-opt:hover{transform:translateY(-5px);border-color:rgba(192,132,252,.5)}
+.book-opt[aria-pressed="true"]{border-color:var(--accent);background:linear-gradient(135deg,rgba(242,179,107,.12),rgba(192,132,252,.1)),var(--card);box-shadow:0 0 0 4px rgba(242,179,107,.08)}
+.book-opt .oi{font-size:1.9rem}
+.book-opt b{font-family:var(--serif),'Hind Siliguri';font-size:1.25rem;font-weight:600}
+.book-opt small{color:var(--muted);font-size:.85rem}
+.book-opt .cnt{margin-top:4px;font-size:.78rem;color:var(--accent)}
+.book-list{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px;animation:rise .6s cubic-bezier(.2,.8,.2,1)}
+.bk{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;transition:.35s}
+.bk:hover{transform:translateY(-6px);border-color:rgba(242,179,107,.4)}
+.bk-cover{aspect-ratio:3/4;display:grid;place-items:center;font-size:3rem;background:linear-gradient(160deg,rgba(242,179,107,.2),rgba(192,132,252,.2));overflow:hidden}
+.bk-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.bk-body{padding:14px 16px 18px}
+.bk-body h4{font-family:var(--serif),'Hind Siliguri';font-size:1.05rem;line-height:1.3}
+.bk-body .au{color:var(--accent);font-size:.82rem;margin-top:2px}
+.bk-body p{color:var(--muted);font-size:.85rem;margin-top:8px}
+.bk-empty{grid-column:1/-1;text-align:center;padding:40px 20px;border:1px dashed rgba(255,255,255,.2);border-radius:var(--radius);color:var(--muted)}
+.bk-empty b{display:block;font-size:2rem;color:var(--accent);font-weight:400;margin-bottom:6px}
+@media(max-width:560px){.book-opts{grid-template-columns:1fr}}
+
 /* visitor band */
 .visit-band{margin-top:clamp(40px,7vw,64px);position:relative;display:flex;align-items:center;gap:clamp(16px,4vw,32px);padding:clamp(22px,4vw,34px) clamp(22px,5vw,42px);border-radius:26px;background:linear-gradient(135deg,rgba(242,179,107,.14),rgba(192,132,252,.14)),var(--card);border:1px solid rgba(242,179,107,.55);box-shadow:0 0 0 6px rgba(242,179,107,.07),0 24px 60px -24px rgba(192,132,252,.55);overflow:hidden}
 .visit-band[hidden]{display:none}
@@ -255,6 +289,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
       <li><a href="#projects">Projects</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#certificates">Certificates</a></li>
+      <li><a href="#books">Books</a></li>
       <li><a href="#services">Services</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
@@ -387,6 +422,23 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
     <h2 class="rv d1">Learning &amp; <em>credentials</em></h2>
     <p class="lead rv d2">Courses I have completed. Tap a certificate to view it larger or verify it online.</p>
     <div class="cert-grid" id="certGrid"></div>
+  </div>
+</section>
+
+<section id="books">
+  <div class="wrap">
+    <div class="eyebrow rv">Books</div>
+    <h2 class="rv d1">My <em>bookshelf</em></h2>
+    <p class="lead rv d2">Tap below to open the shelf.</p>
+    <button class="book-toggle rv" id="bookToggle" aria-expanded="false" aria-controls="bookPanel">
+      <span class="bt-ic">📚</span>
+      <span class="bt-txt"><b>Books</b><small>Tap to open my bookshelf</small></span>
+      <span class="bt-arrow">⌄</span>
+    </button>
+    <div class="book-panel" id="bookPanel" hidden>
+      <div class="book-opts" id="bookOpts"></div>
+      <div class="book-list" id="bookList" hidden></div>
+    </div>
   </div>
 </section>
 
@@ -573,6 +625,37 @@ $$('.srv').forEach(c=>c.addEventListener('pointermove',e=>{
     const el=$('#visitNum');let c=0;const step=Math.max(1,Math.ceil(n/40));
     const t=setInterval(()=>{c=Math.min(n,c+step);el.textContent=c.toLocaleString('en-US');if(c>=n)clearInterval(t)},30);
   }catch(e){}
+})();
+
+// books — content is hidden until clicked. Add books to the two lists below.
+// Format of one book: {t:'Book name', a:'Author', n:'Short note', img:'cover-image-url (optional)'}
+const BOOKS={
+  best:{ic:'🌍',title:'বিশ্বের সেরা বই',sub:"World's best books",items:[]},
+  mine:{ic:'📖',title:'আমার পড়া বই',sub:'Books I have read',items:[]}
+};
+(function(){
+  const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const tg=$('#bookToggle'),panel=$('#bookPanel'),opts=$('#bookOpts'),list=$('#bookList');
+  let cur=null;
+  opts.innerHTML=Object.entries(BOOKS).map(([k,o])=>`<button class="book-opt" data-k="${k}" aria-pressed="false"><span class="oi">${o.ic}</span><b>${o.title}</b><small>${o.sub}</small><span class="cnt">${o.items.length?o.items.length+' books':'Coming soon'}</span></button>`).join('');
+  function show(k){
+    cur=k;
+    $$('.book-opt').forEach(b=>b.setAttribute('aria-pressed',b.dataset.k===k));
+    if(!k){list.hidden=true;return}
+    const items=BOOKS[k].items;
+    list.innerHTML=items.length?items.map(b=>`<article class="bk"><div class="bk-cover">${b.img?`<img src="${esc(b.img)}" alt="${esc(b.t)}" loading="lazy">`:'📘'}</div><div class="bk-body"><h4>${esc(b.t)}</h4>${b.a?`<div class="au">${esc(b.a)}</div>`:''}${b.n?`<p>${esc(b.n)}</p>`:''}</div></article>`).join(''):`<div class="bk-empty"><b>＋</b>এখানে বই যোগ করা হবে<br><small>Books will be added here soon</small></div>`;
+    list.hidden=false;list.style.animation='none';void list.offsetWidth;list.style.animation='';
+  }
+  tg.addEventListener('click',()=>{
+    const open=tg.getAttribute('aria-expanded')!=='true';
+    tg.setAttribute('aria-expanded',open);
+    panel.hidden=!open;
+    if(!open)show(null);
+  });
+  opts.addEventListener('click',e=>{
+    const b=e.target.closest('.book-opt');if(!b)return;
+    show(cur===b.dataset.k?null:b.dataset.k);
+  });
 })();
 
 // toast
