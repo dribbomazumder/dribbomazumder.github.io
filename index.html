@@ -67,7 +67,7 @@ nav.scrolled{background:rgba(11,11,16,.78);backdrop-filter:blur(16px);-webkit-ba
 .btn.ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px)}
 
 /* hero */
-#hero{min-height:100svh;display:flex;align-items:center;padding-top:calc(110px + var(--bar));padding-bottom:70px}
+#hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:calc(96px + var(--bar));padding-bottom:70px}
 .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:50px;align-items:center}
 .hello{display:inline-flex;gap:10px;align-items:center;padding:8px 16px;border:1px solid var(--line);border-radius:100px;font-size:.85rem;color:var(--muted);background:rgba(255,255,255,.02);margin-bottom:26px}
 .hello b{color:var(--accent3);font-weight:500}
@@ -221,6 +221,28 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 .bk-empty b{display:block;font-size:2rem;color:var(--accent);font-weight:400;margin-bottom:6px}
 @media(max-width:560px){.book-opts{grid-template-columns:1fr}}
 
+/* quick access shortcuts */
+.quick{margin-bottom:clamp(26px,5vw,44px)}
+.quick-h{display:flex;align-items:center;gap:12px;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:12px}
+.quick-h i{flex:1;height:1px;background:var(--line)}
+.qk-special{position:relative;display:flex;align-items:center;gap:clamp(12px,3vw,18px);padding:clamp(12px,2.4vw,16px) clamp(14px,3vw,22px);border-radius:20px;background:linear-gradient(110deg,#f2b36b,#e9a0b8 55%,#c084fc);color:#15110a;overflow:hidden;box-shadow:0 0 0 4px rgba(242,179,107,.12),0 18px 44px -18px rgba(242,179,107,.7);transition:.35s}
+.qk-special:hover{transform:translateY(-3px);box-shadow:0 0 0 4px rgba(242,179,107,.2),0 24px 54px -18px rgba(242,179,107,.85)}
+.qk-special::before{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.5) 50%,transparent 70%);transform:translateX(-100%);animation:shine 3.6s ease-in-out infinite}
+.qk-special>*{position:relative}
+.qs-ic{flex:none;width:clamp(44px,10vw,54px);height:clamp(44px,10vw,54px);border-radius:16px;display:grid;place-items:center;font-size:clamp(1.3rem,4vw,1.6rem);background:#15110a}
+.qs-txt{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.25}
+.qs-txt b{font-family:var(--serif);font-size:clamp(1.15rem,4.2vw,1.45rem);font-weight:700}
+.qs-txt small{font-size:clamp(.74rem,2.6vw,.88rem);opacity:.85;font-weight:500}
+.qs-go{flex:none;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#15110a;color:#f6d9b0;font-weight:700;transition:transform .3s}
+.qk-special:hover .qs-go{transform:translateX(4px)}
+.quick-grid{margin-top:12px;display:grid;grid-template-columns:repeat(auto-fit,minmax(112px,1fr));gap:8px}
+.qk{display:flex;align-items:center;justify-content:center;gap:7px;padding:10px 8px;border-radius:14px;border:1px solid var(--line);background:rgba(255,255,255,.03);font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;transition:.25s}
+.qk span{font-size:1rem}
+.qk:hover{border-color:rgba(242,179,107,.55);background:rgba(242,179,107,.09);transform:translateY(-2px);color:var(--accent)}
+@media(max-width:560px){.quick-grid{grid-template-columns:repeat(3,1fr)}.qk{font-size:.78rem;gap:5px;padding:10px 4px}}
+.fab{position:fixed;right:16px;bottom:20px;z-index:45;display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:100px;border:0;background:var(--grad);color:#15110a;font:600 .85rem var(--sans);cursor:pointer;box-shadow:0 14px 34px -10px rgba(242,179,107,.7);opacity:0;transform:translateY(20px);pointer-events:none;transition:.35s}
+.fab.show{opacity:1;transform:none;pointer-events:auto}
+
 /* top bar */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--bar);z-index:51;display:flex;align-items:center;justify-content:center;gap:12px;padding:0 12px;background:linear-gradient(90deg,#f2b36b,#e9a0b8,#c084fc);color:#15110a;font-size:.86rem;white-space:nowrap;overflow:hidden;transition:filter .3s}
 .topbar:hover{filter:brightness(1.07)}
@@ -369,6 +391,25 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </nav>
 
 <header id="hero">
+  <div class="wrap quick" role="navigation" aria-label="Quick shortcuts">
+    <div class="quick-h"><span>Quick access</span><i></i></div>
+    <a class="qk-special" href="#tuition">
+      <span class="qs-ic">🎓</span>
+      <span class="qs-txt"><b>Tuition Wanted</b><small>Class 9–10 Home Tutor · View my CV</small></span>
+      <span class="qs-go">→</span>
+    </a>
+    <div class="quick-grid">
+      <a class="qk" href="#about"><span>👤</span>About</a>
+      <a class="qk" href="#gallery"><span>🖼️</span>Gallery</a>
+      <a class="qk" href="#skills"><span>🛠️</span>Skills</a>
+      <a class="qk" href="#projects"><span>💼</span>Projects</a>
+      <a class="qk" href="#experience"><span>🧭</span>Experience</a>
+      <a class="qk" href="#certificates"><span>🏅</span>Certificates</a>
+      <a class="qk" href="#books"><span>📚</span>Books</a>
+      <a class="qk" href="#services"><span>✨</span>Services</a>
+      <a class="qk" href="#contact"><span>📞</span>Contact</a>
+    </div>
+  </div>
   <div class="wrap hero-grid">
     <div>
       <div class="hello rv"><span class="dot"></span><span><b id="greet">নমস্কার</b> · Open to creative collaborations</span></div>
@@ -630,6 +671,7 @@ footer{padding:34px 0;border-top:1px solid var(--line);color:var(--muted);font-s
 </main>
 
 <footer><div class="wrap foot"><span>© <span id="yr"></span> Dribbo Mazumder</span><span>Designed with care · Chittagong, Bangladesh</span></div></footer>
+<button class="fab" id="fab" aria-label="Back to the shortcuts at the top">↑ Shortcuts</button>
 <div class="toast" id="toast"></div>
 
 <script>/* embedded CV files */
@@ -822,6 +864,13 @@ const BOOKS={
     const b=e.target.closest('.book-opt');if(!b)return;
     show(cur===b.dataset.k?null:b.dataset.k);
   });
+})();
+
+// floating "back to shortcuts" button for people who scrolled far down
+(function(){
+  const f=$('#fab');
+  addEventListener('scroll',()=>f.classList.toggle('show',scrollY>900),{passive:true});
+  f.addEventListener('click',()=>scrollTo({top:0,behavior:'smooth'}));
 })();
 
 // toast
